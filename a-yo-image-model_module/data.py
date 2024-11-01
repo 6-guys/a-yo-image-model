@@ -1,0 +1,66 @@
+import numpy as np
+
+def label_to_one_hot(labels, num_classes, repeat):
+    """
+    Summarize: This function returns one-hot vectors for each frame.
+    Input: 
+        - Shape:
+        - Type: 
+        - Example: 
+    Output:
+        - Shape: 
+        - Type: 
+        - Example: 
+    """
+    current_label_dataset = np.zeros((num_classes))
+    current_label_dataset[labels]  = 1
+    current_label_dataset = np.expand_dims(current_label_dataset, axis=0)
+    current_label_dataset = np.repeat(current_label_dataset, repeats=repeat, axis=0)
+    return current_label_dataset
+
+def data_load(data_path):
+    """
+    Summarize: This function returns one-hot vectors for each frame.
+    Input: 
+        - Shape:
+        - Type: 
+        - Example: 
+    Output:
+        - Shape: 
+        - Type: 
+        - Example: 
+    """
+    dataset = np.load(data_path)
+    return dataset
+
+def dataset_packing(dataset):
+    """
+    Summarize: This function prepares dataset to fit the input shape for the model.
+    Input: 
+        - Shape:
+        - Type: 
+        - Example: 
+    Output:
+        - Shape: 
+        - Type: 
+        - Example: 
+    """
+    # Split into train and validation sets using indexing to optimize memory.
+    dataset = dataset/255
+    x_dataset = dataset[:,0,:,:,:]
+    y_dataset = dataset[:,1,:,:,:]
+    rr  = x_dataset.shape[0]
+    label_dataset = label_to_one_hot(1,10, rr)
+
+    for i in range(8) :
+        x_dataset = np.concatenate((x_dataset, dataset[:,0,:,:,:] ), axis = 0)
+        y_dataset = np.concatenate((y_dataset, dataset[:,i+2,:,:,:] ), axis = 0)
+        label_dataset = np.concatenate((label_dataset, label_to_one_hot(i + 2,10, rr)), axis = 0)
+    
+    indexes = np.arange(x_dataset.shape[0])
+
+    x_train = x_dataset[indexes]
+    y_train = y_dataset[indexes]
+    label_train = label_dataset[indexes]
+
+    return x_train, y_train, label_train
