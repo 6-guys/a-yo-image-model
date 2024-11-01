@@ -1,7 +1,7 @@
 from keras.models import load_model
 
 ################# Load Model #################
-def load_model(model_name):
+def load_model_(model_name, summary=False):
     """
     Summerize: Load the model from '/Models' directory
     Args:
@@ -12,17 +12,16 @@ def load_model(model_name):
     """
     
     model = load_model(f"Models/{model_name}.keras")
+    
+    if summary:
+        """
+        Summerize: Print the summary of the model
+        Args:
+            - model: Model to be summerized
+        """
+        model.summary()
+    
     return model
-
-
-def model_summary(model):
-    """
-    Summerize: Print the summary of the model
-    Args:
-        - model: Model to be summerized
-    """
-    model.summary()
-
 
 ################# Generate Image #################
 def predict(model, dataset):
