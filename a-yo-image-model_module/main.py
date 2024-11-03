@@ -8,6 +8,8 @@ Args json
 - model_name:
 """
 
+data_path = './data_run_offset.npy'
+model_name = 'unetv2_rgbmse'
 
 def main():
     ################# Load Data #################
@@ -18,9 +20,5 @@ def main():
     model = load_model_(model_name, summary=True)
     generated_frames = predict(model, dataset)
     
-    
 if __name__ == "__main__":
     main()
-    
-    
-    
