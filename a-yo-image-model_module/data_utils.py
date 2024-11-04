@@ -47,8 +47,7 @@ def dataset_packing(dataset):
         - Type: 
         - Example: 
     """
-    # Split into train and validation sets using indexing to optimize memory.
-    dataset = dataset/255
+    
     x_dataset = dataset[:,0,:,:,:]
     rr  = x_dataset.shape[0]
     label_dataset = label_to_one_hot(1,10, rr)
@@ -56,14 +55,10 @@ def dataset_packing(dataset):
     for i in range(8) :
         x_dataset = np.concatenate((x_dataset, dataset[:,0,:,:,:] ), axis = 0)
         label_dataset = np.concatenate((label_dataset, label_to_one_hot(i + 2,10, rr)), axis = 0)
-    
-    indexes = np.arange(x_dataset.shape[0])
-    print(indexes)
-    
-    
 
     x_train = x_dataset[0]
     x_train = np.expand_dims(x_train, axis=0)
+    
     label_train = label_dataset[0]
     label_train = np.expand_dims(label_train, axis=0)
     

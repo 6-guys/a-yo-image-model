@@ -22,12 +22,13 @@ def main():
     
     ################# Load Model #################
     model_name = "unetv2_rgbmse"
-    model = load_model_(model_name, summary=True, space='local')
+    model = load_model_(model_name, summary=False, space='local')
     generated_frames = predict(model, x, label)
     print(generated_frames.shape)
     
     ######## Save/Send/Visualization Data ########
     show_result(x, generated_frames, n=10)
+    # animate_frames(x, generated_frames)
     
     
 if __name__ == "__main__":

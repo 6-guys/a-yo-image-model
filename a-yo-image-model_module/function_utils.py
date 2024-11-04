@@ -15,16 +15,3 @@ def mse_rgb(y_true, y_pred):
         - Example: (64, 9, 128, 128, 4)
     """
     return K.mean(K.square(y_true - y_pred), axis=-1)
-
-
-# Example usage
-if __name__ == "__main__":
-    # Example for custom loss function usage
-    y_true = tf.random.normal([1, 128, 128, 3])
-    y_pred = tf.random.normal([1, 128, 128, 3])
-    loss = mse_rgb(y_true, y_pred)
-    print(f"MSE Loss: {loss}")
-    
-    # Example for model loading
-    model = load_model()
-    model.summary()
